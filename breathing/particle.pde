@@ -12,8 +12,8 @@ public class Particle {
     dir = new PVector(0, 0);
     vel = new PVector(0, 0);
     pos = new PVector(x, y);
-    radius = (int) random(3,5);
-    scale = 30;
+    radius = (int) random(2,4);
+    scale = 40;
     speed = 7/radius;
   }
   
@@ -30,17 +30,16 @@ public class Particle {
   
   void checkEdge(){
     if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0){
-      pos.x = width;//random(0, width);
+      pos.x = random(0, width);
       pos.y = random(0, height);
-      red=255;
     }
   }
 
   void display(){
         
-    red-=.5;
+    red-=1;
     if(red<0) {
-      red=0;
+      red=255;
     }
     
     stroke(red,0,45-red/10);
