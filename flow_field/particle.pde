@@ -4,16 +4,21 @@ public class Particle {
   PVector dir;
   PVector pos;
   float speed;
+  int radius;
+  int scale;
+  float red=0;
   
   Particle(int x, int y) {
     dir = new PVector(0, 0);
     vel = new PVector(0, 0);
     pos = new PVector(x, y);
-    speed = 1.2;
+    radius = (int) random(2,4);
+    scale = 40;
+    speed = 7/radius;
   }
   
   void move() {
-    float angle = noise(pos.x/60, pos.y/60)*TWO_PI;
+    float angle = noise(pos.x/scale, pos.y/scale)*TWO_PI;
     dir.x = cos(angle);
     dir.y = sin(angle);
     vel.add(dir);
@@ -25,13 +30,22 @@ public class Particle {
   
   void checkEdge(){
     if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0){
-      pos.x = random(0, width);
+      pos.x = width;//random(0, width);
       pos.y = random(0, height);
+      red=255;
     }
   }
 
-  void display(int r){
-    ellipse(pos.x, pos.y, r, r);
+  void display(){
+        
+    red-=1;
+    if(red<0) {
+      red=0;
+    }
+    
+    stroke(red,0,45-red/10);
+    fill(red,0,45-red/10);
+    ellipse(pos.x, pos.y, radius, radius);
   }
   
 }
